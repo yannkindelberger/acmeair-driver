@@ -107,7 +107,7 @@ Alternatively, the workload can also be ran from the command line if desired.
 
 The most common syntax for running the workload from the command line would be:
 ```text
-%JMETER_DIR%/bin/jmeter -DusePureIDs=true -n -t AcmeAir-v5.jmx -j AcmeAir1.log -l AcmeAir1.jtl (JHOST=myServer.mycompany.com) (-JPORT=9080) (-JTHREAD=25) (-JUSER=999) (-JDURATION=300) (-JRAMP=120) (JURL=acme-app)
+%JMETER_DIR%/bin/jmeter -DusePureIDs=true -n -t AcmeAir-v5.jmx -j AcmeAir1.log -l AcmeAir1.jtl (-JHOST=myServer.mycompany.com) (-JPORT=9080) (-JTHREAD=25) (-JUSER=999) (-JDURATION=300) (-JRAMP=120) (JURL=acme-app)
 ```
 * **-DusePureIDs=true** This is a Java systems property & it is needed (current Acmeair Java & Node.js versions require this)
 * **-n** This specifies JMeter is to run in non-gui mode 
