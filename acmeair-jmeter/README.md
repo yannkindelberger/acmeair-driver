@@ -115,9 +115,9 @@ The most common syntax for running the workload from the command line would be:
 * **-j** The name of the output log file. 
 * **-l** The name of the output file to collect JMeter sampler results. 
 * **-JHOST** Optional : Default is to use hostname defined in hosts.csv. Alternatively, hostname can be passed with this option.
-* **-JPORT** Optional : Default is 80. The port number of the application.  Java usually use 9080 & Node with 80.
+* **-JPORT** Optional : Default is 80. The port number of the application.  Java usually uses 9080 & Node with 80.
 * **-JTHREAD** Optional : Default is 10. The jMeter thread number.  Adjust the number depending on your app & environment.
-* **-JUSER** Optional : Default is 199.  The number of Acmeair users which can be changed when database is populated.  Use Total number of user - 1 (e.g. for total user is 200, this number should be set to 199 meaning users 0 to 199 = 200 will be used to test)
+* **-JUSER** Optional : Default is 199.  The number of Acmeair users which can be changed when database is populated.  Use **Total number of users - 1** (e.g. for total number of users is 200, this number should be set to 199 meaning users 0 to 199 = 200 will be used to test)
 * **-JDURATION** Optional : Default is 600 (10 minutes).  The test duration.
 * **-JRAMP** Optional : Default is 30 (30 seconds).  The thread number will gradually increase within this time frame.
 * **-JURL** Optional : Default is "/".  Usually, Node.js uses default "/".  Java uses "/acmeair-webapp", however, it is configurable within server.xml.  Verify with server.xml for the exact path.  
