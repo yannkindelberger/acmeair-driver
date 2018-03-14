@@ -1,5 +1,11 @@
 # JMeter Workload Setup Instructions
 
+## NEW : Turn off Debug by default (version 2.0.0) - Please replace this version with 1.x version
+Previous driver throw error on console when there is error in Acmeair response.  Now these errors are turned off by default & counted in Summary Err only.  To turn on debug mode, add environment variable DEBUG=true
+
+```text
+export DEBUG=true
+```
 
 These instructions will assist with setting up the Apache JMeter workload for the Acme Air sample application. 
 ## Download Apache JMeter 
@@ -107,17 +113,70 @@ Alternatively, the workload can also be ran from the command line if desired.
 
 The most common syntax for running the workload from the command line would be:
 ```text
-%JMETER_DIR%/bin/jmeter -DusePureIDs=true -n -t AcmeAir-v5.jmx -j AcmeAir1.log -l AcmeAir1.jtl (-JHOST=myServer.mycompany.com) (-JPORT=9080) (-JTHREAD=25) (-JUSER=999) (-JDURATION=300) (-JRAMP=120) (JURL=acme-app)
+%JMETER_DIR%/bin/jmeter -n -t AcmeAir.jmx -j AcmeAir1.log -l AcmeAir1.jtl
 ```
-* **-DusePureIDs=true** This is a Java systems property & it is needed (current Acmeair Java & Node.js versions require this)
 * **-n** This specifies JMeter is to run in non-gui mode 
 * **-t** The name of the JMeter test plan. 
 * **-j** The name of the output log file. 
 * **-l** The name of the output file to collect JMeter sampler results. 
-* **-JHOST** Optional : Default is to use hostname defined in hosts.csv. Alternatively, hostname can be passed with this option.
-* **-JPORT** Optional : Default is 80. The port number of the application.  Java usually uses 9080 & Node with 80.
-* **-JTHREAD** Optional : Default is 10. The jMeter thread number.  Adjust the number depending on your app & environment.
-* **-JUSER** Optional : Default is 199.  The number of Acmeair users which can be changed when database is populated.  Use **Total number of users - 1** (e.g. for total number of users is 200, this number should be set to 199 meaning users 0 to 199 = 200 will be used to test)
-* **-JDURATION** Optional : Default is 600 (10 minutes).  The test duration.
-* **-JRAMP** Optional : Default is 30 (30 seconds).  The thread number will gradually increase within this time frame.
-* **-JURL** Optional : Default is "/".  Usually, Node.js uses default "/".  Java uses "/acmeair-webapp", however, it is configurable within server.xml.  Verify with server.xml for the exact path.  
+
+
+## Instructions to run the workload for the NodeJS implementation
+
+In order to run the JMeter workload script with the NodeJS implementation of Acme Air, there are a couple of minor changes necessary.  
+
+*1*.) Change the CONTEXT_ROOT  user defined variable from /acmeair-webapp  to an empty value. 
+
+```text
+       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="CONTEXT_ROOT" elementType="Argument">
+              <stringProp name="Argument.name">CONTEXT_ROOT</stringProp>
+              <stringProp name="Argument.value">/acmeair-webapp</stringProp>
+              <stringProp name="Argument.desc">prepended to all http urls</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+```
+In the above stanza *Argument.value* should be changed to: 
+
+```text
+ <stringProp name="Argument.value"></stringProp>
+```
+
+
+
+*2*.) Change the port from 9080 to 3000 
+
+```text
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${WLP_HOSTS}</stringProp>
+          <stringProp name="HTTPSampler.port">9080</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/acmeair-webapp</stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+```
+The HTTPSampler.port property should be changed to be 3000 (or whichever port the target server is listening on).
+
+```text
+<stringProp name="HTTPSampler.port">3000</stringProp>
+```
+
+
+*3*.) When running the jmeter command add a Java systems property to the command line: 
+
+```text
+%JMETER_DIR%/bin/jmeter -DusePureIDs=true -n -t AcmeAir.jmx -j AcmeAir1.log -l AcmeAir1.jtl
+```
+
+
+

@@ -57,12 +57,17 @@ public class FlightsPostProcessor extends AbstractTestElement implements PostPro
 	private static final String FLIGHT_RET_COUNT = "FLIGHTRETCOUNT";
 	private static final String ONE_WAY = "ONEWAY";
 	FlightsContext context;
+	private static Boolean debug = Boolean.valueOf(System.getenv("DEBUG"));
+
 	
 	@Override
 	public void process() {
+		 
 		 SampleResult prev = JMeterContextService.getContext().getPreviousResult();
 		 if(prev.getErrorCount()>0){
-			 System.out.println("FlightsPostProcessor - Last sample received an error. Response Code = " + prev.getResponseCode() +"."); 
+			 if (debug){
+				 System.out.println("FlightsPostProcessor - Last sample received an error. Response Code = " + prev.getResponseCode() +"."); 
+			 }
 			 return;
 		 }
 		 context = FlightsThreadLocal.get();
@@ -127,9 +132,8 @@ public class FlightsPostProcessor extends AbstractTestElement implements PostPro
 							context.setTOSEGMENTID(fsId);
 						}
 						else {
-							JSONObject flightOption0Pkey = (JSONObject) flightOption0.get("pkey");
-							context.setTOFLIGHT((String) flightOption0Pkey.get("id"));
-							context.setTOSEGMENTID((String) flightOption0Pkey.get("flightSegmentId"));
+							String id = (String)flightOption0.get("id");
+							context.setTOFLIGHT(id);
 						}
 					} else if (counter == 2) {
 						JSONObject flightOption0 = (JSONObject) jsonFlightOptions.get(tripCounter - 1);
@@ -140,9 +144,8 @@ public class FlightsPostProcessor extends AbstractTestElement implements PostPro
 							context.setRESEGMENTID(fsId);
 						}
 						else {
-							JSONObject flightOption0Pkey = (JSONObject) flightOption0.get("pkey");
-							context.setRETFLIGHT((String) flightOption0Pkey.get("id"));
-							context.setRESEGMENTID((String) flightOption0Pkey.get("flightSegmentId"));
+							String id = (String)flightOption0.get("id");
+							context.setRETFLIGHT(id);
 						}
 					}
 				}
@@ -152,15 +155,21 @@ public class FlightsPostProcessor extends AbstractTestElement implements PostPro
 			return json.toJSONString();
 
 		} catch (ParseException e) {
-			System.out.println("responseDataAsString = " + responseDataAsString);
-			e.printStackTrace();
+			if (debug){
+			  System.out.println("responseDataAsString = " + responseDataAsString);
+			  e.printStackTrace();
+			}
 		}
 		catch (NullPointerException e) {
-			e.printStackTrace();
-			System.out.println("NullPointerException in FlightsPostProcessor - ResponseData =" + responseDataAsString);
+			if (debug){
+			  e.printStackTrace();
+			  System.out.println("NullPointerException in FlightsPostProcessor - ResponseData =" + responseDataAsString);
+			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			if (debug){
+			  e.printStackTrace();
+			}
 		}
 		return null;
 	}

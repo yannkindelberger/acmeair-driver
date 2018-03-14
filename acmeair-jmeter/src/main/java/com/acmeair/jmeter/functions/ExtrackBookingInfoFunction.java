@@ -39,6 +39,7 @@ public class ExtrackBookingInfoFunction extends AbstractFunction {
 	private static final String KEY = "__extractBookingInfo";
 	private List<CompoundVariable> parameters = Collections.emptyList();
 	BookingContext context;
+	private static Boolean debug = Boolean.valueOf(System.getenv("DEBUG"));
 
 	@Override
 	synchronized public String execute(SampleResult arg0, Sampler arg1)
@@ -49,7 +50,9 @@ public class ExtrackBookingInfoFunction extends AbstractFunction {
 			return "";
 		}
 		if(arg0.getErrorCount()>0){
-			System.out.println("ExtrackBookingInfoFunction - Last sample received an error. Response Code = " + arg0.getResponseCode() +".");			
+			if (debug){
+				System.out.println("ExtrackBookingInfoFunction - Last sample received an error. Response Code = " + arg0.getResponseCode() +".");			
+			}
 			return "";			
 		}
 		
@@ -114,15 +117,21 @@ public class ExtrackBookingInfoFunction extends AbstractFunction {
 			BookingThreadLocal.set(context);
 
 		} catch (ParseException e) {
-			System.out.println("responseDataAsString = " + sample.getResponseDataAsString());
-			e.printStackTrace();
+			if (debug){
+				System.out.println("responseDataAsString = " + sample.getResponseDataAsString());
+				e.printStackTrace();
+			}
 		}
 		catch (NullPointerException e) {
-			System.out.println("NullPointerException in ExtrackBookingInfoFunction - ResponseData =" + sample.getResponseDataAsString());
-			e.printStackTrace();
+			if (debug){
+				System.out.println("NullPointerException in ExtrackBookingInfoFunction - ResponseData =" + sample.getResponseDataAsString());
+				e.printStackTrace();
+			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			if (debug){
+				e.printStackTrace();
+			}
 		}
 	}
 

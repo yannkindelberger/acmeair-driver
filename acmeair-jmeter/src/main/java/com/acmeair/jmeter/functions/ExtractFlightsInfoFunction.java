@@ -44,6 +44,7 @@ public class ExtractFlightsInfoFunction extends AbstractFunction {
 	private static final String FLIGHT_TO_COUNT = "FLIGHTTOCOUNT";
 	private static final String FLIGHT_RET_COUNT = "FLIGHTRETCOUNT";
 	FlightsContext context;
+	private static Boolean debug = Boolean.valueOf(System.getenv("DEBUG"));
 	
 	public static boolean pureIDs = false; // if false use the PK sub objects as created by WXS storage, if true, simpler _id at root level
 	
@@ -69,7 +70,10 @@ public class ExtractFlightsInfoFunction extends AbstractFunction {
 
 		context = FlightsThreadLocal.get();
 		if (context == null) {
-			System.out.println(this.getClass().getName() + " FlightsContext is null. This should not be null. FlightsContext should be created by FlightsPostProcessor.");
+			if (debug){
+				System.out.println(this.getClass().getName() + " FlightsContext is null. This should not be null. FlightsContext should be created by FlightsPostProcessor.");
+			}
+			return null;
 		}
 
 		if (value.equalsIgnoreCase("isFlightAvailable")) {

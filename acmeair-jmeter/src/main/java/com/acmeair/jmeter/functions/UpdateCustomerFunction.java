@@ -34,6 +34,7 @@ public class UpdateCustomerFunction extends AbstractFunction {
 
 	private static final List<String> DESC = Arrays.asList("update_customer");
 	private static final String KEY = "__updateCustomer";
+	private static Boolean debug = Boolean.valueOf(System.getenv("DEBUG"));
 
 	@SuppressWarnings("unused")
 	private List<CompoundVariable> parameters = Collections.emptyList();
@@ -91,12 +92,18 @@ public class UpdateCustomerFunction extends AbstractFunction {
 			return json.toJSONString();
 
 		} catch (ParseException e) {
-			e.printStackTrace();
+			if (debug){
+				e.printStackTrace();
+			}
 		} catch (NullPointerException e) {
-			e.printStackTrace();
-			System.out.println("NullPointerException in UpdateCustomerFunction - ResponseData =" + responseDataAsString);
+			if (debug){
+				e.printStackTrace();
+				System.out.println("NullPointerException in UpdateCustomerFunction - ResponseData =" + responseDataAsString);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (debug){
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
