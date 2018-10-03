@@ -19,10 +19,8 @@ tar -xzf apache-jmeter-XXX.tgz
 ```
 ## Adding Acme Air Driver library and json-simple library into jMeter library
 
-Place acmeair-jmeter-2.0.0-SNAPSHOT.jar in <JMETER_DIR>/lib/ext/
-Also needed is the json-simple library to jmeter's ext directory. 
-* Download Link: http://code.google.com/p/json-simple/
-* Download the json-simple-1.1.1.jar and copy the jar to <JMETER_DIR>/lib/ext/
+* Place acmeair-jmeter-2.0.0-SNAPSHOT.jar in <JMETER_DIR>/lib/ext/
+* Download the [json-simple-1.1.1.jar](http://code.google.com/p/json-simple/) and copy the jar to <JMETER_DIR>/lib/ext/
 
 ##  (Optional) Build and Package the Acme Air Driver Code
 Go in to the acmeair-driver directory and use the gradle wrapper (included in the repository) to compile and package the jar file. 
