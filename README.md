@@ -1,6 +1,12 @@
 # JMeter Workload Setup Instructions
 
 These instructions will assist with setting up the Apache JMeter workload for the Acme Air application. 
+
+## Prerequisite 
+
+* Java SDK is required to function jmeter.  In the past, IBM JDK had issue with performance, we recommend Oracle JDK instead.
+* One issue was reported that date format was not properly processed by acmeair application when jmeter was deployed in non-US English language.  We encourage for US English OS to be used to install jmeter.
+
 ## Download Apache JMeter 
 
 * Download Link:  [http://jmeter.apache.org](http://jmeter.apache.org)
