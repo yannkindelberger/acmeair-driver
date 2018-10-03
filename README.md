@@ -109,6 +109,8 @@ The listeners provide an option for writing the results to an output file.  In b
 
 ## Run the Workload from the command line for Performance Analysis
 
+Please make sure to download all these files together in [this directory](acmeair-jmeter/scripts) in jmeter box
+
 The most common syntax for running the workload from the command line would be:
 
 
