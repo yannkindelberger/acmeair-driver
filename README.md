@@ -50,7 +50,7 @@ The workload can be started using either the command line or JMeter's graphical 
 * jmeter graphical interface is to be used for developing, debugging & experimenting purpose only.
 * Use command line mode for accurate performance data. 
 
-To run the workload using the command line, some additional steps are needed to configure what will be collected in the output. Edit the %JMETER_DIR%/bin/jmeter.properties file setting the summariser properties to get basic output reporting.
+To run the workload using the command line, some additional steps are needed to configure what will be collected in the output. Edit the <JMETER_DIR>/bin/jmeter.properties file setting the summariser properties to get basic output reporting.
 
 ```text
 #---------------------------------------------------------------------------
@@ -71,7 +71,7 @@ The default format of the JTL file output is csv. if desired, this can be switch
 jmeter.save.saveservice.output_format=xml
 ```
 
-In addition to the standard metrics that are available within JMeter, the AcmeAir.jmx test plan also has some additional metrics available.  These custom metrics can be printed in the JTL output file by adding the sample_variables property to the %JMETER_DIR%/bin/user.properties file. 
+In addition to the standard metrics that are available within JMeter, the test plan also has some additional metrics available.  These custom metrics can be printed in the JTL output file by adding the sample_variables property to the <JMETER_DIR>/bin/user.properties file. 
 ```text
 sample_variables=FLIGHTTOCOUNT,FLIGHTRETCOUNT,ONEWAY
 ```
