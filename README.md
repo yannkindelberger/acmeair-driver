@@ -110,19 +110,19 @@ The listeners provide an option for writing the results to an output file.  In b
 ## Run the Workload from the command line for Performance Analysis
 
 The most common syntax for running the workload from the command line would be:
+
+
+
 ```text
-%JMETER_DIR%/bin/jmeter -n -t AcmeAir.jmx -j AcmeAir1.log -l AcmeAir1.jtl
+%JMETER_DIR%/bin/jmeter -n -t AcmeAir-microservices.jmx -DusePureIDs=true -JHOST=${HOST} -JPORT=${PORT} -j jMeter-logName -JTHREAD=100 -JUSER=999 -JDURATION=${DURATION} -JRAMP=0 -JDELAY=0
 ```
+
 * **-n** This specifies JMeter is to run in non-gui mode 
 * **-t** The name of the JMeter test plan. 
 * **-j** The name of the output log file. 
 * **-l** The name of the output file to collect JMeter sampler results. 
 
-These Java System Properties can be added to overwrite default values:
-
-```text
-%JMETER_DIR%/bin/jmeter -n -t AcmeAir-microservices.jmx -DusePureIDs=true -JHOST=${HOST} -JPORT=${PORT} -j jMeter-logName -JTHREAD=100 -JUSER=999 -JDURATION=${DURATION} -JRAMP=0 -JDELAY=0
-```
+These Java System Properties are added for convenience:
 
 * **-JHOST** The host name of the Acmeair LB (e.g. ingress URL.  All services must be accessed using single hostname)
 * **-JPORT** The port number to access Acmeair services
