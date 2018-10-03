@@ -78,7 +78,7 @@ sample_variables=FLIGHTTOCOUNT,FLIGHTRETCOUNT,ONEWAY
 
 ## Run the Workload using the JMeter GUI 
 
-Running the jmeter command in the bin directory will bring up the JMeter GUI window (Figure 1). You can then open up the AcmeAir.jmx script file in to the JMeter GUI. The parameters of the run are configurable from the JMeter GUI window.  
+Running the jmeter command in the bin directory will bring up the JMeter GUI window (Figure 1). You can then open up the [jmx](acmeair-jmeter/scripts/AcmeAir-microservices.jmx) script file in to the JMeter GUI. The parameters of the run are configurable from the JMeter GUI window.  
 
 **Figure 1.** 
 ![JMeter GUI, main screen](Documentation/images/AcmeAir-jmx_main.png)
