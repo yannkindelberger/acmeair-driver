@@ -23,7 +23,7 @@ tar -xzf apache-jmeter-XXX.tgz
 * Download the [json-simple-1.1.1.jar](http://code.google.com/p/json-simple/) and copy the jar to <JMETER_DIR>/lib/ext/
 
 ##  (Optional) Build and Package the Acme Air Driver Code
-Go in to the acmeair-driver directory and use the gradle wrapper (included in the repository) to compile and package the jar file. 
+If you want to implement your own version of Acme Air Driver, go in to the acmeair-driver directory and use the gradle wrapper (included in the repository) to compile and package the jar file. 
 
 ```text
 cd acmeair-driver 
