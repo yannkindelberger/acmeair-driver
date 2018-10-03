@@ -107,8 +107,7 @@ After setting the desired parameters for the test plan, and saving your changes,
 
 The listeners provide an option for writing the results to an output file.  In between doing multiple workload runs it is recommended that you clear the result data *Run* -> *Clear All* (Ctrl-E).  
 
-## Run the Workload from the command line
-Alternatively, the workload can also be ran from the command line if desired. 
+## Run the Workload from the command line for Performance Analysis
 
 The most common syntax for running the workload from the command line would be:
 ```text
