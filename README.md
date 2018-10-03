@@ -4,6 +4,8 @@ These instructions will assist with setting up the Apache JMeter workload for th
 
 ## Prerequisite 
 
+Setup the jMeter server in the same time zone as the Acme Air application. This is due to the flight query operation that it requires exact date & time to be specified to query the flight information.  To automate this query, time is set to be **0:00 midnight of the time zone**
+
 Java SDK is required to function jmeter.  In the past, IBM JDK had issue with performance, we recommend Oracle JDK instead.
 
 One issue was reported that date format was not properly processed by acmeair application when jmeter was deployed in non-US English language.  We encourage for US English OS to be used to install jmeter.
