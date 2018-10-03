@@ -1,12 +1,5 @@
 # JMeter Workload Setup Instructions
 
-## Turn off Debug by default (version 2.0.0) - Please replace this version with 1.x version
-Previous driver throw error on console when there is error in Acmeair response.  Now these errors are turned off by default & counted in Summary Err only.  To turn on debug mode, add environment variable DEBUG=true
-
-```text
-export DEBUG=true
-```
-
 These instructions will assist with setting up the Apache JMeter workload for the Acme Air application. 
 ## Download Apache JMeter 
 
@@ -135,3 +128,10 @@ These Java System Properties can be added to overwrite default values:
 * **-JDURATION** Duration of the test run (seconds)
 * **-JRAMP** Ramp time (seconds)
 * **-JDELAY** Delay in starting the test (seconds)
+
+## Turn off Debug by default (version 2.0.0) - Please replace this version with 1.x version
+Previous driver throw error on console when there is error in Acmeair response.  Now these errors are turned off by default & counted in Summary Err only.  To turn on debug mode, add environment variable DEBUG=true
+
+```text
+export DEBUG=true
+```
