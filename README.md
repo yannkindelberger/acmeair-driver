@@ -114,7 +114,7 @@ The most common syntax for running the workload from the command line would be:
 
 
 ```text
-%JMETER_DIR%/bin/jmeter -n -t AcmeAir-microservices.jmx -DusePureIDs=true -JHOST=${HOST} -JPORT=${PORT} -j jMeter-logName -JTHREAD=100 -JUSER=999 -JDURATION=${DURATION} -JRAMP=0 -JDELAY=0
+%JMETER_DIR%/bin/jmeter -n -t AcmeAir-microservices.jmx -DusePureIDs=true -JHOST=${HOST} -JPORT=${PORT} -j jMeter-logName -JTHREAD=10 -JUSER=999 -JDURATION=${DURATION} -JRAMP=0 -JDELAY=0
 ```
 
 * **-n** This specifies JMeter is to run in non-gui mode 
@@ -126,7 +126,7 @@ These Java System Properties are added for convenience:
 
 * **-JHOST** The host name of the Acmeair LB (e.g. ingress URL.  All services must be accessed using single hostname)
 * **-JPORT** The port number to access Acmeair services
-* **-JTHREAD** jMeter thread number
+* **-JTHREAD** jMeter thread number. Adjust this number for the best performance
 * **-JUSER** Total Acmeair user number to be used for testing (if 1000 users are setup, use 999 : 0 - 999 users, total 1000)
 * **-JDURATION** Duration of the test run (seconds)
 * **-JRAMP** Ramp time (seconds)
