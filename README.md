@@ -4,8 +4,14 @@ These instructions will assist with setting up the Apache JMeter workload for th
 
 ## Prerequisite 
 
-* Java SDK is required to function jmeter.  In the past, IBM JDK had issue with performance, we recommend Oracle JDK instead.
-* One issue was reported that date format was not properly processed by acmeair application when jmeter was deployed in non-US English language.  We encourage for US English OS to be used to install jmeter.
+Java SDK is required to function jmeter.  In the past, IBM JDK had issue with performance, we recommend Oracle JDK instead.
+
+One issue was reported that date format was not properly processed by acmeair application when jmeter was deployed in non-US English language.  We encourage for US English OS to be used to install jmeter.
+
+Please make sure to load the fresh database (it is time sensitive, old data with old flight dates will cause performance variances)
+*  curl http://<HOSTNAME>:<PORT NUMBER>/booking/loader/load
+*  curl http://<HOSTNAME>:<PORT NUMBER>/flight/loader/load
+*  curl http://<HOSTNAME>:<PORT NUMBER>/customer/loader/load?numCustomers=10000 (note : this will load 10,000 simulated user data)
 
 ## Download Apache JMeter 
 
