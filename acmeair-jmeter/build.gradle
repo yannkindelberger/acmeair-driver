@@ -3,5 +3,6 @@ apply plugin: 'java'
 dependencies {
      compile 'org.apache.jmeter:ApacheJMeter_core:2.11'
      compile 'com.googlecode.json-simple:json-simple:1.1.1'
+     compile 'com.auth0:java-jwt:3.8.0'
 }
 
