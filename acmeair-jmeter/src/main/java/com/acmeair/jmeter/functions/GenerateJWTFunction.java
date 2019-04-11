@@ -1,6 +1,7 @@
 package com.acmeair.jmeter.functions;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -46,6 +47,8 @@ public class GenerateJWTFunction extends AbstractFunction {
   private static String token = "";
   private static int count = 0;
 
+  public static Algorithm algorithm;
+
   static {
     if (System.getProperty("JWT.keystore.location") == null) {
       keyStoreLocation = "/keyfile/key.p12";
@@ -82,22 +85,12 @@ public class GenerateJWTFunction extends AbstractFunction {
     } else {
       jwtSubject = System.getProperty("JWT.subject");
     }
-  }
-  
-  public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
 
 
-    if (count > 0 && token !="") {
-      count = (count + 1) % 10;
-      //System.out.println("count is not 0, returning" + token);
-      return token;
-    }
-    count = (count + 1) % 10;
-
-
+    FileInputStream is;
     try {
+      is = new FileInputStream(keyStoreLocation);
 
-      FileInputStream is = new FileInputStream(keyStoreLocation);
 
       // Get Private Key
       KeyStore keystore = KeyStore.getInstance(keyStoreType);
@@ -110,34 +103,49 @@ public class GenerateJWTFunction extends AbstractFunction {
         // Get public key and create jwt token
         Certificate cert = keystore.getCertificate(keyStoreAlias);       
         RSAPublicKey publicKey = (RSAPublicKey) cert.getPublicKey();        
-        Algorithm algorithm = Algorithm.RSA256(publicKey,(RSAPrivateKey) key);
+        algorithm = Algorithm.RSA256(publicKey,(RSAPrivateKey) key);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-        LocalDateTime now = LocalDateTime.now();
-        Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
-        Date date = Date.from(instant);
+  }
 
-        LocalDateTime plusHour = LocalDateTime.now().plusHours(1);
-        Instant instantPlusHour = plusHour.atZone(ZoneId.systemDefault()).toInstant();
-        Date datePlusHour = Date.from(instantPlusHour);
-
-        token = JWT.create()
-            .withSubject(jwtSubject)
-            .withIssuer(jwtIssuer)
-            .withExpiresAt(datePlusHour)
-            .withIssuedAt(date)
-            .withArrayClaim("groups", new String[]{jwtGroup})
-            .withClaim("upn", jwtSubject)
-            .withJWTId("jti")
-            .sign(algorithm);
-      } 
+  public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
 
 
+    if (count > 0 && token !="") {
+      count = (count + 1) % 50;
+      //System.out.println("count is not 0, returning" + token);
+      return token;
+    }
+    count = (count + 1) % 10;
+
+
+    try {
+      LocalDateTime now = LocalDateTime.now();
+      Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
+      Date date = Date.from(instant);
+
+      LocalDateTime plusHour = LocalDateTime.now().plusHours(1);
+      Instant instantPlusHour = plusHour.atZone(ZoneId.systemDefault()).toInstant();
+      Date datePlusHour = Date.from(instantPlusHour);
+
+      token = JWT.create()
+          .withSubject(jwtSubject)
+          .withIssuer(jwtIssuer)
+          .withExpiresAt(datePlusHour)
+          .withIssuedAt(date)
+          .withArrayClaim("groups", new String[]{jwtGroup})
+          .withClaim("upn", jwtSubject)
+          .withJWTId("jti")
+          .sign(algorithm);
     } catch (Exception exception) {
 
       exception.printStackTrace(); 
     }
 
-    
+
     //System.out.println(token);
     return token;
   }
