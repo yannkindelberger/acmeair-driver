@@ -11,9 +11,9 @@ Java SDK is required to function jmeter.  In the past, IBM JDK had issue with pe
 One issue was reported that date format was not properly processed by acmeair application when jmeter was deployed in non-US English language.  We encourage for US English OS to be used to install jmeter.
 
 Please make sure to load the fresh database (it is time sensitive, old data with old flight dates will cause performance variances)
-*  curl http://<HOSTNAME>:<PORT NUMBER>/booking/loader/load
-*  curl http://<HOSTNAME>:<PORT NUMBER>/flight/loader/load
-*  curl http://<HOSTNAME>:<PORT NUMBER>/customer/loader/load?numCustomers=10000 (note : this will load 10,000 simulated user data)
+*  curl http://HOSTNAME:PORT_NUMBER/booking/loader/load
+*  curl http://HOSTNAME:PORT_NUMBER/flight/loader/load
+*  curl http://HOSTNAME:PORT_NUMBER/customer/loader/load?numCustomers=10000 (note : this will load 10,000 simulated user data)
 
 ## Download Apache JMeter 
 
@@ -28,7 +28,7 @@ tar -xzf apache-jmeter-XXX.tgz
 ## Adding Acme Air Driver library and json-simple library into jMeter library
 
 * Place acmeair-jmeter-2.0.0-SNAPSHOT.jar in <JMETER_DIR>/lib/ext/
-* Download the [json-simple-1.1.1.jar](http://code.google.com/p/json-simple/) and copy the jar to <JMETER_DIR>/lib/ext/
+* Download the [json-simple-1.1.1.jar](https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar) and copy the jar to <JMETER_DIR>/lib/ext/
 
 ##  (Optional) Build and Package the Acme Air Driver Code
 If you want to implement your own version of Acme Air Driver, go in to the acmeair-driver directory and use the gradle wrapper (included in the repository) to compile and package the jar file. 
