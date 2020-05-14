@@ -84,7 +84,22 @@ In addition to the standard metrics that are available within JMeter, the test p
 sample_variables=FLIGHTTOCOUNT,FLIGHTRETCOUNT,ONEWAY
 ```
 
+## Additional Steps for AcmeairMS
+* Edit the jmeter property (in <JMETER_DIR>/bin jmeter.properties): 
+```
+CookieManager.save.cookies=true
+```
+* In the steps below, use the following jmx script:
+```
+AcmeAir-microservices-mpJwt.jmx script.
+```
+
 ## Run the Workload using the JMeter GUI 
+
+Note: Alays wun jmeter with 
+```
+-DusePureIDs=true
+```
 
 Running the jmeter command in the bin directory will bring up the JMeter GUI window (Figure 1). You can then open up the [jmx](acmeair-jmeter/scripts/AcmeAir-microservices.jmx) script file in to the JMeter GUI. The parameters of the run are configurable from the JMeter GUI window.  
 
