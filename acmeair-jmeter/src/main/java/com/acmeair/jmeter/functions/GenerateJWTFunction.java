@@ -1,7 +1,6 @@
 package com.acmeair.jmeter.functions;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -139,14 +138,12 @@ public class GenerateJWTFunction extends AbstractFunction {
           .withArrayClaim("groups", new String[]{jwtGroup})
           .withClaim("upn", jwtSubject)
           .withJWTId("jti")
+          .withAudience("https://audience.com")
           .sign(algorithm);
     } catch (Exception exception) {
 
       exception.printStackTrace(); 
-    }
-
-
-    //System.out.println(token);
+    }    
     return token;
   }
   @Override
