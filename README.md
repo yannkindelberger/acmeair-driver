@@ -96,7 +96,7 @@ AcmeAir-microservices-mpJwt.jmx script.
 
 ## Run the Workload using the JMeter GUI 
 
-Note: Alays wun jmeter with 
+Note: Always run jmeter with 
 ```
 -DusePureIDs=true
 ```
