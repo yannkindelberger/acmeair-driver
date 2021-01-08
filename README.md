@@ -98,7 +98,7 @@ AcmeAir-microservices-mpJwt.jmx script.
 
 Note: Always run jmeter with 
 ```
--DusePureIDs=true
+./jmeter.sh -DusePureIDs=true
 ```
 
 Running the jmeter command in the bin directory will bring up the JMeter GUI window (Figure 1). You can then open up the [jmx](acmeair-jmeter/scripts/AcmeAir-microservices.jmx) script file in to the JMeter GUI. The parameters of the run are configurable from the JMeter GUI window.  
